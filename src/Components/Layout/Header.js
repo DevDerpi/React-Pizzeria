@@ -5,11 +5,11 @@ import MealsSummary from "./MealsSummary";
 const Header = (props) => {
   return (
     <React.Fragment>
-      <div className={styles.header}>
+      <header className={styles.header}>
         <h1>React Pizzeria</h1>
-      </div>
+      </header>
       <div className={styles["main-image"]}>
-        <img src={bgImage} />
+        <img src={bgImage} alt="Pizza background" />
       </div>
       <MealsSummary />
     </React.Fragment>
