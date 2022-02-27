@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./Header.module.css";
 import bgImage from "./images/pizza.jpg";
 import MealsSummary from "./MealsSummary";
-const Header = () => {
+const Header = (props) => {
   return (
-    <div>
+    <React.Fragment>
       <div className={styles.header}>
         <h1>React Pizzeria</h1>
       </div>
@@ -12,7 +12,7 @@ const Header = () => {
         <img src={bgImage} />
       </div>
       <MealsSummary />
-    </div>
+    </React.Fragment>
   );
 };
 export default Header;
