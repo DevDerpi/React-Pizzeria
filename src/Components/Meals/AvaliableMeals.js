@@ -10,6 +10,7 @@ const AvailableMeals = (props) => {
           {props.meals.map((meal) => (
             <MealItem
               key={meal.id}
+              id={meal.id}
               pizzaName={meal.name}
               pizzaDesc={meal.description}
               pizzaPrice={meal.price}
