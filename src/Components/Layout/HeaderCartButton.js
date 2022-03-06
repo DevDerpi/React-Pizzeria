@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "./HeaderCartButton.module.css";
 import CartIcon from "../UI/CartIcon";
-const Cart = (props) => {
+const HeaderCartButton = (props) => {
   let totalMeals = 2;
   const cartClickHandler = (event) => {
     event.preventDefault();
+    props.clicked();
   };
   return (
     <form>
@@ -18,4 +19,4 @@ const Cart = (props) => {
     </form>
   );
 };
-export default Cart;
+export default HeaderCartButton;
