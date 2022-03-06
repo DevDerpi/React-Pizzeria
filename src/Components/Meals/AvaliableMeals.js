@@ -4,8 +4,8 @@ import Card from "../UI/Card";
 import MealItem from "./MealItem";
 const AvailableMeals = (props) => {
   return (
-    <Card>
-      <div className={styles.meals}>
+    <div className={styles.meals}>
+      <Card>
         <ul>
           {props.meals.map((meal) => (
             <MealItem
@@ -16,8 +16,8 @@ const AvailableMeals = (props) => {
             />
           ))}
         </ul>
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 };
 export default AvailableMeals;
