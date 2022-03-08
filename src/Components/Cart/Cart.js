@@ -13,7 +13,9 @@ const Cart = (props) => {
     event.preventDefault();
     props.close();
   };
-  const cartAddItemHandler = (item) => {};
+  const cartAddItemHandler = (item) => {
+    ctx.addNewMeal({ ...item, amount: 1 });
+  };
   const cartRemoveItemHandler = (id) => {};
   // const DUMMY_CART_ITEMS = [
   //   {
@@ -47,15 +49,15 @@ const Cart = (props) => {
                   name={item.name}
                   price={item.price}
                   amount={item.amount}
-                  onAdd={cartAddItemHandler}
-                  onRemove={cartRemoveItemHandler}
+                  onAdd={cartAddItemHandler.bind(null, item)}
+                  onRemove={cartRemoveItemHandler.bind(null, item.id)}
                 />
               );
             })}
           </ul>
           <div className={styles.total}>
             <span>Total Amount </span>
-            <span>{"LE" + ctx.totalAmount}</span>
+            <span>{"LE" + ctx.totalAmount.toFixed(2)}</span>
           </div>
         </Fragment>
       ) : (

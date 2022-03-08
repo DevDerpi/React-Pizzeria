@@ -6,7 +6,22 @@ const defaultCartState = {
 };
 const cartReducer = (state, action) => {
   if (action.type === "ADD_CART_ITEM") {
-    const updatedMeals = state.meals.concat(action.meal);
+    const indexOfExistingMeal = state.meals.findIndex((item) => {
+      return item.id === action.meal.id;
+    });
+    let updatedMeals;
+    const existingMeal = state.meals[indexOfExistingMeal];
+    if (existingMeal) {
+      const updatedMeal = {
+        ...existingMeal,
+        amount: existingMeal.amount + action.meal.amount,
+      };
+      updatedMeals = [...state.meals];
+      updatedMeals[indexOfExistingMeal] = updatedMeal;
+    } else {
+      updatedMeals = state.meals.concat(action.meal);
+    }
+
     const updatedTotalAmount =
       state.totalAmount + action.meal.price * action.meal.amount;
     return {
