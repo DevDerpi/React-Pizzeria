@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext , } from "react";
 import styles from "./HeaderCartButton.module.css";
 import CartIcon from "../UI/CartIcon";
+import cartContext from "../../store/cart-context";
+
 const HeaderCartButton = (props) => {
-  let totalMeals = 2;
+  const ctx = useContext(cartContext);
+
+  let totalMeals = ctx.meals.length;
   const cartClickHandler = (event) => {
     event.preventDefault();
     props.clicked();

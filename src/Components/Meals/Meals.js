@@ -5,27 +5,27 @@ import MealsSummary from "./MealsSummary";
 const Meals = (props) => {
   const DUMMY_MEALS = [
     {
-      id: "m1",
+      id: "M1",
       name: "Margherita Pizza",
       description:
         "Pizza topping including : Basil, fresh mozzarella, and tomatoes.",
       price: 22.99,
     },
     {
-      id: "m2",
+      id: "C",
       name: "Cheese Pizza",
       description:
         "A classic is the statistical favorite. a delicious mixture of cheese ",
       price: 12.5,
     },
     {
-      id: "m3",
+      id: "M2",
       name: "Meat Pizza",
       description: "Pile on ground beef and sausage for a hearty meal.",
       price: 16.99,
     },
     {
-      id: "m4",
+      id: "B",
       name: "BBQ Chicken Pizza",
       description:
         "chicken slathered over the top of a pie gives it a tangy, sweet flavor that can’t be beaten.",
