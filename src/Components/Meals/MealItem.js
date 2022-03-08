@@ -10,7 +10,7 @@ const MealItem = (props) => {
   const ctx = useContext(CartContext);
   const addMealHandler = (mealAmount) => {
     const newMeal = {
-      amount: mealAmount,
+      amount: +mealAmount,
       id: mealID,
       price: mealPrice,
       name: mealName,

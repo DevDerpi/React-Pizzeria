@@ -1,4 +1,4 @@
-import React, { useContext , } from "react";
+import React, { useContext } from "react";
 import styles from "./HeaderCartButton.module.css";
 import CartIcon from "../UI/CartIcon";
 import cartContext from "../../store/cart-context";
@@ -6,7 +6,9 @@ import cartContext from "../../store/cart-context";
 const HeaderCartButton = (props) => {
   const ctx = useContext(cartContext);
 
-  let totalMeals = ctx.meals.length;
+  const totalMeals = ctx.meals.reduce((curNum, item) => {
+    return curNum + item.amount;
+  }, 0);
   const cartClickHandler = (event) => {
     event.preventDefault();
     props.clicked();
