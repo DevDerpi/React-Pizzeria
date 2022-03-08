@@ -24,6 +24,32 @@ const cartReducer = (state, action) => {
 
     const updatedTotalAmount =
       state.totalAmount + action.meal.price * action.meal.amount;
+
+    return {
+      meals: updatedMeals,
+      totalAmount: updatedTotalAmount,
+    };
+  }
+  if (action.type === "REMOVE_CART_ITEM") {
+    const indexOfExistingMeal = state.meals.findIndex((item) => {
+      return item.id === action.id;
+    });
+    const existingMeal = state.meals[indexOfExistingMeal];
+    const updatedTotalAmount = state.totalAmount - existingMeal.price;
+    let updatedMeals;
+    if (existingMeal.amount > 1) {
+      const updatedMeal = {
+        ...existingMeal,
+        amount: existingMeal.amount - 1,
+      };
+      updatedMeals = [...state.meals];
+      updatedMeals[indexOfExistingMeal] = updatedMeal;
+    } else {
+      //   updatedMeals = [...state.meals];
+      //   updatedMeals.splice(indexOfExistingMeal, 1);
+      updatedMeals = state.meals.filter((item) => item.id !== action.id);
+    }
+
     return {
       meals: updatedMeals,
       totalAmount: updatedTotalAmount,
@@ -56,7 +82,12 @@ const CartProvider = (props) => {
   //     );
   //     console.log(cartMeals);
   //   }, [cartMeals.meals]);
-  const removeMealHandler = (id) => {};
+  const removeMealHandler = (id) => {
+    cartMealsDispatch({
+      type: "REMOVE_CART_ITEM",
+      id: id,
+    });
+  };
   const cartContext = {
     meals: cartMeals.meals,
     totalAmount: cartMeals.totalAmount,

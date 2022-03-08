@@ -16,7 +16,9 @@ const Cart = (props) => {
   const cartAddItemHandler = (item) => {
     ctx.addNewMeal({ ...item, amount: 1 });
   };
-  const cartRemoveItemHandler = (id) => {};
+  const cartRemoveItemHandler = (id) => {
+    ctx.removeMeal(id);
+  };
   // const DUMMY_CART_ITEMS = [
   //   {
   //     id: "m1",
@@ -39,7 +41,7 @@ const Cart = (props) => {
   // console.log(total);
   return (
     <Modal onClick={closeBtnHanlder}>
-      {ctx.totalAmount > 0 ? (
+      {ctx.meals.length > 0 ? (
         <Fragment>
           <ul className={styles["cart-items"]}>
             {ctx.meals.map((item) => {
@@ -68,7 +70,7 @@ const Cart = (props) => {
         <button className={styles["button--alt"]} onClick={closeBtnHanlder}>
           Close
         </button>
-        {ctx.totalAmount > 0 && (
+        {ctx.meals.length > 0 && (
           <button onClick={orderBtnHandler} className={styles.button}>
             Order
           </button>
