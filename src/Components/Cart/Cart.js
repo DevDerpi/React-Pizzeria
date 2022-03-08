@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
 import styles from "./Cart.module.css";
 import CartItem from "./CartItem";
 import Modal from "../UI/Modal";
@@ -13,6 +13,8 @@ const Cart = (props) => {
     event.preventDefault();
     props.close();
   };
+  const cartAddItemHandler = (item) => {};
+  const cartRemoveItemHandler = (id) => {};
   // const DUMMY_CART_ITEMS = [
   //   {
   //     id: "m1",
@@ -35,29 +37,40 @@ const Cart = (props) => {
   // console.log(total);
   return (
     <Modal onClick={closeBtnHanlder}>
-      <ul className={styles["cart-items"]}>
-        {ctx.meals.map((item) => {
-          return (
-            <CartItem
-              key={item.id}
-              name={item.name}
-              price={item.price}
-              amount={item.amount}
-            />
-          );
-        })}
-      </ul>
-      <div className={styles.total}>
-        <span>Total Amount </span>
-        <span>{"LE" + ctx.totalAmount}</span>
-      </div>
+      {ctx.totalAmount > 0 ? (
+        <Fragment>
+          <ul className={styles["cart-items"]}>
+            {ctx.meals.map((item) => {
+              return (
+                <CartItem
+                  key={item.id}
+                  name={item.name}
+                  price={item.price}
+                  amount={item.amount}
+                  onAdd={cartAddItemHandler}
+                  onRemove={cartRemoveItemHandler}
+                />
+              );
+            })}
+          </ul>
+          <div className={styles.total}>
+            <span>Total Amount </span>
+            <span>{"LE" + ctx.totalAmount}</span>
+          </div>
+        </Fragment>
+      ) : (
+        <span className={styles.total}>Cart is Empty</span>
+      )}
+
       <div className={styles.actions}>
         <button className={styles["button--alt"]} onClick={closeBtnHanlder}>
           Close
         </button>
-        <button onClick={orderBtnHandler} className={styles.button}>
-          Order
-        </button>
+        {ctx.totalAmount > 0 && (
+          <button onClick={orderBtnHandler} className={styles.button}>
+            Order
+          </button>
+        )}
       </div>
     </Modal>
   );
