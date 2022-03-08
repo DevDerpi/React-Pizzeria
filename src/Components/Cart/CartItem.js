@@ -8,7 +8,7 @@ const CartItem = (props) => {
         <span className={styles.price}>{props.price}</span>
         <span className={styles.amount}>{"x"+props.amount}</span>
       </div>
-
+      
       <div className={styles.actions}>
         <button>-</button>
         <button>+</button>
