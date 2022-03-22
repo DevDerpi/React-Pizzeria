@@ -3,39 +3,10 @@ import AvaliableMeals from "./AvaliableMeals";
 import MealsSummary from "./MealsSummary";
 
 const Meals = (props) => {
-  const DUMMY_MEALS = [
-    {
-      id: "M1",
-      name: "Margherita Pizza",
-      description:
-        "Pizza topping including : Basil, fresh mozzarella, and tomatoes.",
-      price: 22.99,
-    },
-    {
-      id: "C",
-      name: "Cheese Pizza",
-      description:
-        "A classic is the statistical favorite. a delicious mixture of cheese ",
-      price: 12.5,
-    },
-    {
-      id: "M2",
-      name: "Meat Pizza",
-      description: "Pile on ground beef and sausage for a hearty meal.",
-      price: 16.99,
-    },
-    {
-      id: "B",
-      name: "BBQ Chicken Pizza",
-      description:
-        "chicken slathered over the top of a pie gives it a tangy, sweet flavor that can’t be beaten.",
-      price: 18.99,
-    },
-  ];
   return (
     <div>
       <MealsSummary />
-      <AvaliableMeals meals={DUMMY_MEALS} />
+      <AvaliableMeals />
     </div>
   );
 };
