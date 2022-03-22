@@ -20,7 +20,6 @@ const AvailableMeals = (props) => {
       fetchedMeals.push(meal);
     }
     setMeals(fetchedMeals);
-    console.log(fetchedMeals);
   };
   useEffect(() => {
     sendRequest(

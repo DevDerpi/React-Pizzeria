@@ -26,7 +26,6 @@ const useHttp = () => {
       setIsLoading(false);
     }
   }, []);
-  console.log("Do we have error ? : " + hasError);
   return { sendRequest, hasError, isLoading };
 };
 export default useHttp;
