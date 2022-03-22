@@ -3,15 +3,17 @@ import styles from "./Cart.module.css";
 import CartItem from "./CartItem";
 import Modal from "../UI/Modal";
 import CartContext from "../../store/cart-context";
+
 const Cart = (props) => {
   const ctx = useContext(CartContext);
   const orderBtnHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault(); //show checkout form
     console.log("Ordering ...");
+    props.onOrder();
   };
   const closeBtnHanlder = (event) => {
     event.preventDefault();
-    props.close();
+    props.onClose();
   };
   const cartAddItemHandler = (item) => {
     ctx.addNewMeal({ ...item, amount: 1 });
@@ -19,26 +21,7 @@ const Cart = (props) => {
   const cartRemoveItemHandler = (id) => {
     ctx.removeMeal(id);
   };
-  // const DUMMY_CART_ITEMS = [
-  //   {
-  //     id: "m1",
-  //     name: "Margherita Pizza",
-  //     price: 22.99,
-  //     amount: 2,
-  //   },
 
-  //   {
-  //     id: "m3",
-  //     name: "Meat Pizza",
-  //     price: 24.99,
-  //     amount: 1,
-  //   },
-  // ];
-  // const priceArr = DUMMY_CART_ITEMS.map((item) => {
-  //   return item.price * item.amount;
-  // });
-  // const total = priceArr.reduce((partialSum, a) => partialSum + a, 0);
-  // console.log(total);
   return (
     <Modal onClick={closeBtnHanlder}>
       {ctx.meals.length > 0 ? (

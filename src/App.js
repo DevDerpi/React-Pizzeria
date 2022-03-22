@@ -2,14 +2,21 @@ import React, { useState } from "react";
 import Header from "./Components/Layout/Header";
 import Meals from "./Components/Meals/Meals";
 import Cart from "./Components/Cart/Cart";
+import Checkout from "./Components/Cart/Checkout";
 import CartProvider from "./store/CartProvider";
 function App() {
   const [cartState, setCartState] = useState(false);
+  const [checkoutState, setCheckoutState] = useState(false);
   const cartClickedHandler = () => {
     setCartState(true);
   };
   const closeBtnHanlder = () => {
     setCartState(false);
+    setCheckoutState(false);
+  };
+  const orderClickHandler = () => {
+    setCartState(false);
+    setCheckoutState(true);
   };
   return (
     <CartProvider>
@@ -17,7 +24,10 @@ function App() {
       <main>
         <Meals />
       </main>
-      {cartState && <Cart close={closeBtnHanlder} />}
+      {checkoutState && <Checkout onClose={closeBtnHanlder} />}
+      {cartState && (
+        <Cart onClose={closeBtnHanlder} onOrder={orderClickHandler} />
+      )}
     </CartProvider>
   );
 }
