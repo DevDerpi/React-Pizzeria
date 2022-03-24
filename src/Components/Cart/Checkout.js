@@ -32,6 +32,7 @@ const Checkout = (props) => {
     nameClearFn();
     addressClearFn();
     phoneClearFn();
+    ctx.resetCart();
   };
   const formisInvalid =
     nameValue.trim() === "" ||
