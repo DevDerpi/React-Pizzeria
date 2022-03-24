@@ -81,7 +81,10 @@ const Checkout = (props) => {
   const wheelHandler = (event) => {
     event.target.blur();
   };
-  console.log(isLoading);
+  const backBtnHanlder = (event) => {
+    event.preventDefault();
+    props.onBackToCart();
+  };
   if (isLoading) {
     return (
       <Modal onClick={closeBtnHanlder}>
@@ -172,6 +175,9 @@ const Checkout = (props) => {
           </div>
         </div>
         <div className={styles.actions}>
+          <button className={styles["button--back"]} onClick={backBtnHanlder}>
+            Back
+          </button>
           <button className={styles["button--alt"]} onClick={closeBtnHanlder}>
             Close
           </button>

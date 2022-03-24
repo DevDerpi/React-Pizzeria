@@ -70,6 +70,10 @@ input[type="number"] {
 .actions .button--alt {
   color: #8a2b06;
 }
+.actions .button--back {
+  color: #8a2b06;
+  float: left;
+}
 
 .actions .button {
   background-color: #8a2b06;

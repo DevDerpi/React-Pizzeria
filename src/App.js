@@ -18,13 +18,19 @@ function App() {
     setCartState(false);
     setCheckoutState(true);
   };
+  const backToCartHandler = () => {
+    setCheckoutState(false);
+    setCartState(true);
+  };
   return (
     <CartProvider>
       <Header clicked={cartClickedHandler} />
       <main>
         <Meals />
       </main>
-      {checkoutState && <Checkout onClose={closeBtnHanlder} />}
+      {checkoutState && (
+        <Checkout onClose={closeBtnHanlder} onBackToCart={backToCartHandler} />
+      )}
       {cartState && (
         <Cart onClose={closeBtnHanlder} onOrder={orderClickHandler} />
       )}
