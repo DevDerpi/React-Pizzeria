@@ -21,7 +21,14 @@
   width: 20rem;
   max-width: 100%;
 }
-
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 .form-control input:focus {
   outline: none;
   border-color: #240370;
@@ -39,19 +46,6 @@
   flex: 1;
 }
 
-.invalid input {
-  border: 1px solid #b40e0e;
-  background-color: #fddddd;
-}
-
-.invalid input:focus {
-  border-color: #ff8800;
-  background-color: #fbe8d2;
-}
-
-.error-text {
-  color: #b40e0e;
-}
 .actions {
   text-align: right;
 }
@@ -89,4 +83,17 @@
   color: rgb(70, 66, 66);
   border: #ccc;
   cursor: not-allowed;
+}
+.invalid input {
+  border: 1px solid #b40e0e;
+  background-color: #fddddd;
+}
+
+.invalid input:focus {
+  border-color: #ff8800;
+  background-color: #fbe8d2;
+}
+
+.error-text {
+  color: #b40e0e;
 }
