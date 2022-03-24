@@ -19,11 +19,17 @@ const useHttp = () => {
         });
     }
     if (config.method === "POST") {
-      axios.post(config.url, config.data).catch((error) => {
-        console.log(error);
-        setHasError(true);
-      });
-      setIsLoading(false);
+      axios
+        .post(config.url, config.data)
+        .then((res) => {
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setHasError(true);
+          setIsLoading(false);
+
+        });
     }
   }, []);
   return { sendRequest, hasError, isLoading };

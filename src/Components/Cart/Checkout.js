@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import useInput from "../../hooks/use-input";
 import styles from "./Checkout.module.css";
 import Modal from "../UI/Modal";
-
+import useHttp from "../../hooks/use-http";
+import CartContext from "../../store/cart-context";
 const Checkout = (props) => {
+  const ctx = useContext(CartContext);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const {
     enteredValue: nameValue,
     inputIsInvalid: nameIsInvalid,
@@ -30,11 +33,11 @@ const Checkout = (props) => {
     addressClearFn();
     phoneClearFn();
   };
-
   const formisInvalid =
     nameValue.trim() === "" ||
     addressValue.trim() === "" ||
     phoneValue.trim().length < 11;
+  const { sendRequest, hasError, isLoading } = useHttp();
   const submissionHandler = (event) => {
     event.preventDefault();
     if (formisInvalid) {
@@ -44,6 +47,30 @@ const Checkout = (props) => {
     console.log(
       "Name " + nameValue + "Phone " + phoneValue + "Address " + addressValue
     );
+    const meals = ctx.meals;
+    const mealsSummary = [];
+    for (const key in meals) {
+      console.log(meals[key].amount + meals[key].name);
+      const pizzaType = meals[key].name;
+      const pizzaAmount = meals[key].amount;
+      const meal = {
+        pizzaType,
+        pizzaAmount,
+      };
+      mealsSummary.push(meal);
+    }
+    const order = {
+      clientName: nameValue,
+      clientAddress: addressValue,
+      clientPhoneNumber: phoneValue,
+      mealsSummary,
+    };
+    setIsSubmitted(true);
+    sendRequest({
+      url: "https://react-pizzeria-fc68d-default-rtdb.firebaseio.com/orders.json",
+      method: "POST",
+      data: { order },
+    });
     reset();
   };
   const closeBtnHanlder = (event) => {
@@ -53,6 +80,28 @@ const Checkout = (props) => {
   const wheelHandler = (event) => {
     event.target.blur();
   };
+  console.log(isLoading);
+  if (isLoading) {
+    return (
+      <Modal onClick={closeBtnHanlder}>
+        <h2>Loading...</h2>
+      </Modal>
+    );
+  }
+  if (hasError) {
+    return (
+      <Modal onClick={closeBtnHanlder}>
+        <h2>Something Went Wrong</h2>
+      </Modal>
+    );
+  }
+  if (isSubmitted) {
+    return (
+      <Modal onClick={closeBtnHanlder}>
+        <h2>Submitted Successfully, Your order is being processed</h2>
+      </Modal>
+    );
+  }
   return (
     <Modal onClick={closeBtnHanlder}>
       <form onSubmit={submissionHandler}>
@@ -115,7 +164,9 @@ const Checkout = (props) => {
               onWheel={wheelHandler}
             />
             {phoneIsInvalid && (
-              <p className={styles["error-text"]}>phone field can't be empty</p>
+              <p className={styles["error-text"]}>
+                please enter a valid mobile number
+              </p>
             )}
           </div>
         </div>
