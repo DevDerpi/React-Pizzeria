@@ -23,12 +23,12 @@ const useHttp = () => {
         .post(config.url, config.data)
         .then((res) => {
           setIsLoading(false);
+          applyData();
         })
         .catch((error) => {
           console.log(error);
           setHasError(true);
           setIsLoading(false);
-
         });
     }
   }, []);

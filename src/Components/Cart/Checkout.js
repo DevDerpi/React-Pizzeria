@@ -67,12 +67,14 @@ const Checkout = (props) => {
       mealsSummary,
     };
     setIsSubmitted(true);
-    sendRequest({
-      url: "https://react-pizzeria-fc68d-default-rtdb.firebaseio.com/orders.json",
-      method: "POST",
-      data: { order },
-    });
-    reset();
+    sendRequest(
+      {
+        url: "https://react-pizzeria-fc68d-default-rtdb.firebaseio.com/orders.json",
+        method: "POST",
+        data: order,
+      },
+      reset
+    );
   };
   const closeBtnHanlder = (event) => {
     event.preventDefault();
